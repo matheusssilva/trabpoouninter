@@ -88,16 +88,18 @@ public class App // Casse principal
                     case 4: // Bloco da opção calcular total.
                         Double dolarPrice = 0.0, euroPrice = 0.0, total = 0.0;
 
+                        // Cria onjeto responsável por consultar as cotaes em uma WEB API publica
                         CotacaoService cs = new CotacaoService(new Dolar(0.0), new Real(0.0));
 
-                        dolarPrice = cs.getCotacaMoeda().getValor();
+                        dolarPrice = cs.getCotacaMoeda().getValor(); // Obtem a cotação do dolar no dia.
                         cs.setOrigeMoeda(new Euro(0.0));
-                        euroPrice = cs.getCotacaMoeda().getValor();
+                        euroPrice = cs.getCotacaMoeda().getValor(); // Obtem cotação do euro no dia.
                         System.out.println("\nCotação do Dolar: " + dolarPrice);
                         System.out.println("Cotação do Euro: " + euroPrice);
                         System.out.println("\nMOEDAS:");
                         App.listaMoedas(moedas);
 
+                        /*Loop para conversão e soma das moedas no cofre */
                         for (Moeda moeda : moedas) {
                             if (moeda.getSigla().equals("EUR")) {
                                 total += moeda.getValor() * euroPrice;
